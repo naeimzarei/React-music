@@ -6,47 +6,40 @@
 import * as React from "react";
 import "./style.css";
 import Clip from "./Clip";
-import TopBar from "./TopBar";
-import { BrowserRouter, Route } from "react-router-dom";
 import SelectSong from "./SelectSong";
-import Config from "./config";
 import { observer } from 'mobx-react';
 
 const App = observer(
   class App extends React.Component {
-    constructor(props) {
-      super(props);
-      this.state = {
-        songSelected: 1 
-      };
-      this.url = Config.URLS[this.state.songSelected-1];
-    }
     render() {
-      return (
-        <div>
-          <BrowserRouter>
+      // this is how you access the store from the top container 
+      // you pass this as a prop to the children components from
+      // the app component. Look at index.js to see how to initialize
+      // store for the first time. We only need to pass store as a 
+      // prop to the children component since all our logic resides
+      // within the Store file. 
+      let store = this.props.store;
+      
+      // here we do conditional rendering of components instead of
+      // using react routers
+      switch (store.currentPage) {
+        case "/":
+          return (
             <div>
-              <Route path="/" component={TopBar} />
-              <Route path="/" component={() => <Clip url={this.url} />} exact />
-              <Route
-                path="/select"
-                component={() => 
-                  <SelectSong songSelected={this.state.songSelected} increment={()=> this.setState({songSelected: this.state.songSelected+1})}/>
-                }
-              />
+              <Clip store={store}></Clip>
             </div>
-          </BrowserRouter>
-        </div>
-      );
-    }
-  
-    updateSong() {
-      this.setState({
-        url: Config.URLS[this.state.songSelected-1]
-      })
-    };
-    increment(){
-      this.setState({songSelected: this.state.songSelected+1});
+          );
+        case "/select":
+          return (
+            <div>
+              <SelectSong store={ store } />
+            </div>
+          );
+        default:
+          return (
+            <Clip store={store}></Clip>
+          );
+      }
     }
   }
 );

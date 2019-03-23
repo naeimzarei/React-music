@@ -7,27 +7,14 @@ import { observer } from "mobx-react";
 
 const SelectSong = observer(
   class SelectSong extends React.Component {
-    // constructor(props) {
-      // super(props);
-      // this.state = {
-      //   songSelected: 1
-      // };
-      // this.increment = this.increment.bind(this);
-    // }
-    increment() {
-      // var temp = this.state.songSelected + 1;
-      // this.setState({
-      //   songSelected: temp
-      // });
-      // this.props.increment();
-    }
     render() {
+      let store = this.props.store;
       return (
         <div>
-          <a href="/">Home</a>
+          <button onClick={() => store.setPage("/")}>Home</button>
           <br />
-          <button onClick={this.props.increment}>Increment</button>
-          {this.props.songSelected}
+          <button onClick={() => store.increment()}>Increment</button>
+          <p>{store.songSelected}</p>
         </div>
       );
     }
