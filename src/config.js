@@ -1,3 +1,12 @@
+/**
+ * This file contains all the necessary environmental variables
+ * that will be accessed from all files. Environmental variables
+ * refer to the variables that define the logistics of an application
+ * during runtime. For instance, what are the URLs of the MP3 files
+ * or whether or not we are in a production or quality assurance
+ * environment? 
+ */
+
 let config = {};
 
 config.URLS = [

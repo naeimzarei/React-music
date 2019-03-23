@@ -1,16 +1,23 @@
-import React, { Component } from "react";
+/**
+ * This file contains the TopBar component.
+ */
 
-class topBar extends Component {
-  render() {
-    return (
-      <ul>
-        <li style={{ float: "right" }}>
-          <a href="https://helppage.stackblitz.io">Help</a>
-        </li>
-      </ul>
-    );
+import * as React from "react";
+import { observer } from "mobx-react";
+
+const TopBar = observer(
+  class TopBar extends React.Component {
+    render() {
+      return (
+        <ul>
+          <li style={{ float: "right" }}>
+            <a href="https://helppage.stackblitz.io">Help</a>
+          </li>
+        </ul>
+      );
+    }
   }
-}
+);
 /*
         <li>
           <a href="#Home">Home</a>
@@ -19,4 +26,5 @@ class topBar extends Component {
           <a href="https://stackblitz.com/edit/music-app">Music Game</a>
         </li>
 */
-export default topBar;
+
+export default TopBar;
